@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+int main() 
+{
+	int size;
+	bool flag=false;
+	cout<<"enter size of an array"<<endl;
+	cin>>size;
+	int numtofind;
+		int start=0;
+	int end=size;
+	int arr[size];
+	cout<<"enter values of an array"<<endl;
+	for(int i=0;i<=size;i++)
+	{
+		cout<<"enter values"<<i<<endl;
+		cin>>arr[i];
+	}
+	cout<<"enter number you want to find"<<endl;
+	cin>>numtofind;
+	while(start<=end)
+	{
+			if(arr[start]==numtofind)
+			{
+				flag=true;
+				break;
+			}
+			else
+			{
+			  start++;
+		}
+	}
+			if (flag)
+			{
+				cout<<numtofind<<"number found";
+				
+			}
+			
+			else
+			{
+				cout<<numtofind<<"number not found";
+			}
+	
+
+}
