@@ -1,0 +1,13 @@
+#include<iostream>
+#include"Stack.h"
+using namespace std;
+int main()
+{
+ Intstack ist(20);
+ ist.PUSH(5);
+ ist.PUSH(14);
+ ist.Display();
+ ist.POP();
+ ist.Display();
+ 
+}
