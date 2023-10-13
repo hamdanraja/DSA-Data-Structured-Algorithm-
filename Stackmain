@@ -11,3 +11,43 @@ int main()
  ist.Display();
  
 }
+
+*******************Stack underflow****************************
+
+
+#include<iostream>
+#include"Stack.h"
+using namespace std;
+int main()
+{
+ Intstack ist(5);
+/* ist.PUSH(5);
+ ist.PUSH(6);
+  ist.PUSH(7);
+ ist.PUSH(19);
+  ist.PUSH(20);
+ ist.PUSH(14);*/
+ //ist.Display();
+  ist.POP();
+ //ist.Display();
+ 
+}
+
+*************************Stack overflow****************************
+#include<iostream>
+#include"Stack.h"
+using namespace std;
+int main()
+{
+ Intstack ist(5);
+ ist.PUSH(5);
+ ist.PUSH(6);
+  ist.PUSH(7);
+ ist.PUSH(8);
+  ist.PUSH(5);
+ ist.PUSH(14);
+ //ist.Display();
+ //ist.POP();
+ //ist.Display();
+ 
+}
