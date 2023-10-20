@@ -1,0 +1,17 @@
+.h file:
+
+#include<iostream>
+using namespace std;
+
+class Node
+{
+	public:
+		double data;    // Data Part
+		Node *next;  // Link Part
+		
+		Node(double i=0 , Node*n=0)   // Constructor
+		{
+			data = i;
+			next = n;
+		}
+};
