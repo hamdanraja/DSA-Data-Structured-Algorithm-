@@ -1,0 +1,71 @@
+#include <iostream>
+#include "Dlinkedlist.h"
+using namespace std;
+int main()
+{
+	double value;
+	double existing;
+	int choice;
+	Dlinkedlist list;
+	do
+	{
+		
+		cout<<"Press 1 for insert at head"<<endl;
+		cout<<"Press 2 for insert at tail"<<endl;
+		cout<<"Press 3 for insert after"<<endl;
+		cout<<"Press 4 for insert before"<<endl;
+		cout<<"Press 5 for delete from head"<<endl;
+		cout<<"Press 6 for delete from tail"<<endl;
+		cout<<"Press 7 for delete from specific node"<<endl;
+		cout<<"Press 8 for traverse node"<<endl;
+		cout<<"Press 9 for reverse traverse node"<<endl;
+		cout<<"Enter number: ";
+		cin>>choice;
+		switch (choice)
+		{
+			case 1:
+			cout<<"Enter value to insert at head: ";
+			cin>>value;
+			list.insertathead(value);
+			break;
+	     case 2:
+			cout<<"Enter value to insert at tail: ";
+			cin>>value;
+			list.insertattail(value);
+		    break;
+		case 3:
+			cout<<"Enter value to insert after: ";
+			cin>>existing;
+			cin>>value;
+			list.insertafter(existing,value);
+		     break;
+	    case 4:
+			cout<<"Enter value to insert before: ";
+			cin>>existing;
+			cin>>value;
+			list.insertbefore(existing,value);
+		    break;
+		case 5:		
+			list.deletefromhead();
+		    break;
+		case 6:		
+			list.deletefromtail();
+			break;
+		case 7:	
+			cout<<"Enter value for specific deletion: ";
+			cin>>value;
+			list.deletespecific(value);
+			break;	
+		case 8:	
+			list.forward_traverse();
+		    break;
+		case 9:	
+			list.reverse_traverse();
+		    break;	 
+		case 10:
+			cout<<"ended"<<endl;
+		}
+		
+	}
+	while(choice!=10);
+}
