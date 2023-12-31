@@ -1,112 +1,81 @@
 #include<iostream>
 using namespace std;
-class doubleCircularQueue
-{
+class queue{
+    private:
+     double *queueArray;
+     int queueSize;
+     int front;
+     int rear;
+     int numItems;
+    public:
+    queue(int size){
+        queueArray = new double[size];
+        queueSize = size;
+        front=-1;
+        rear=-1;
+        numItems=0;
+    }
+    ~queue(){
+        delete [] queueArray;
+    }
+    bool isEmpty(){
+        if(numItems<=0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    bool isFull(){
+        if(numItems==queueSize){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    void ENQUEUE(double val){
+        if(isFull()){
+            cout<<"\n\nQueue is Full\n\n";
+        }
+        else{
+            if(front==-1){
+                front=0;
+            }
+            rear = (rear+1)%queueSize;
+            queueArray[rear] = val;
+            numItems++;
+        }
+    }
+    void DEQUEUE(){
+        if(isEmpty()){
+            cout<<"\n\nQueue is Empty\n\n";
+        }
 
-	private:
-		double *queueArray;
-		int queuesize;
-		int front;
-		int rear;
-	public:
-	doubleCircularQueue(int size)
-	{
-		queueArray=new double(size);//double[size]
-		queuesize=size;
-		front=-1;
-		rear=-1;
-	}
-	~doubleCircularQueue()
-	{
-		delete []queueArray;
-		}	
-		bool isFull()
-		{
-			if(rear == 0 && rear== queuesize-1 || front==rear+1)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		bool isEmpty()
-		{
-			if(front==-1 && rear==-1)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		void ENQUEUE(double value)
-		{
-			if(isFull())
-			{
-				cout<<"Queue is full :"<<endl;
-			}
-			else
-			{
-				if(front==-1)
-				{
-					front=0;
-				}
-				rear=(rear+1)%queuesize;
-				queueArray[rear]=value;
-			}
-		}
-		void DEQUEUE()
-		{
-			if(isEmpty())
-			{
-				cout<<"Queue is Empty"<<endl;
-			}
-			else
-			{
-				cout<<endl<<queueArray[front]<<"value is delete from queue"<<endl;
-				if(front==rear)//only one item in queue
-				{
-					front=rear=-1;
-				}
-				else
-				{
-					front=(front+1)%queuesize;
-				}
-			}
-		}
-		void DISPLAY()
-		{
-			if(isEmpty())
-			{
-				cout<<"list is empty"<<endl;
-			}
-			else
-			{
-				if(front<=rear)
-				{
-					cout<<"values in Queue are"<<endl;
-						for(int i=front;i<=rear;i++)
-				
-				}
-				else if(front>rear)
-				{
-					cout<<"values in Queue are"<<endl;
-					for(int i=front;i<=queuesize;i++)
-						{
-							cout<<queueArray[i]<<"\t"<<endl;
-						}
-					for(int i=0;i<=rear;i++)
-						{
-							cout<<queueArray[i]<<"\t"<<endl;
-						}
-				}		
-			
-			}
-		}
-};
+        else{
+            cout<<"\n\n"<<queueArray[front]<<" has DEQUEUED\n\n";
+            if(front==rear){
+                front=rear=-1;
+            }
+            else{
+            front = (front+1)%queueSize;
+            }
+        numItems--;
+        }
+    }
+    void display(){
+        if(isEmpty()){
+            cout<<"\n\nQueue is Empty\n\n";
+        }
+        else{
+        int i=front;
+        do{
+        cout<<queueArray[i]<<"\t";
+        i=(i+1)%queueSize;
+        }while(i!=(rear+1)%queueSize);
+        }
+    }
+}
 
 
 
