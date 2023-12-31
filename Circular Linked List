@@ -1,0 +1,193 @@
+#include<iostream>
+#include"Cnode.cp"
+using namespace std;
+class Clinkedlist
+{
+	private:
+		Cnode* head=0;
+	public:
+		Clinkedlist()
+		{
+			head=0;
+				}
+		bool IsEmpty()
+		{
+			if(head==0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}	
+		void Insertathead(double value)
+		{
+			Cnode* newnode=new Cnode(value);
+			if(head==0)
+			{
+				head=newnode;
+				newnode->next=head;
+			}
+			else
+			{
+				Cnode* curr=head;
+				newnode->next=head;
+				while(curr->next!=head)
+				{
+					curr=curr->next;
+				}
+				newnode->next=head;
+				curr->next=newnode;
+				newnode=head;
+			}
+		}	
+		void insertatlast(double value)
+		{
+			Cnode* newnode=new Cnode(value);
+			newnode->next=head;
+			if(head==0)
+			{
+				head=newnode;
+				newnode->next=head;
+			}
+			else
+			{
+				Cnode*curr=head;
+				newnode->next=head;
+				while(curr->next!=head)
+				{
+					curr=curr->next;
+				}
+				newnode->next=curr->next;
+				curr->next=newnode;
+			}
+		}
+		void deletefromhead()
+		{
+			if(head==0)
+			{
+				cout<<"list is empty"<<endl;
+			}
+			else
+			{
+				Cnode* delnode=head;
+				Cnode* curr=head;
+				while(curr->next!=head)
+				{
+					curr=curr->next;
+				}
+				curr->next=head->next;
+				head=head->next;
+				delnode->next=0;
+				delete delnode;
+			}
+		}
+		void deletespecific(double exist)
+		{
+			if(head==0)
+			{
+				cout<<"list is empty"<<endl;
+			}
+			else if(head->data==exist)
+			{
+				deletefromhead();
+			}
+			else
+			{
+				Cnode* curr=head->next;
+				Cnode* prev=head;
+				while(curr!=head &&curr->data!=exist)
+				{
+					prev=curr;
+					curr=curr->next;
+				}
+				if(curr==head)
+				{
+					cout<<"values noT found"<<endl;
+				}
+				else
+				{
+					prev->next=curr->next;
+					curr->next=0;
+					delete curr;
+					
+				}
+			}
+		}
+		void traverse()
+		{
+			if(head==0)
+			{
+				cout<<"values noT found"<<endl;
+			}
+			else
+			{
+				Cnode* curr=head;
+				do
+				{
+					cout<<curr->data<<endl;
+					curr=curr->next;	
+				}
+				while(curr!=head);
+			}
+		}
+		void InsertAfter(double exist,double value)
+		{
+			if(head==0)
+			{
+				cout<<"list is empty"<<endl;
+			}
+			else
+			{
+				Cnode* curr=head;
+				while(curr!=0 && curr->data!=exist)
+				{
+					curr=curr->next;
+				}
+				if(curr==head)
+				{
+					cout<<"values not found"<<endl;
+				}
+				else
+				{
+					Cnode *newnode= new Cnode(value);
+					newnode->next=curr->next;
+					curr->next=newnode;
+				}
+			}
+		}
+		void insertBefore(double exist,double value)
+		{
+			
+			if(head==0)
+			{
+				cout<<"list is empty"<<endl;
+			}
+			else if(head->data==exist)
+			{
+				Insertathead(value);
+			}
+			else
+			{
+				Cnode* curr=head;
+				Cnode* prev=0;
+				while(curr!=0 && curr->data!=exist)
+				{
+					curr=curr->next;
+					prev=curr;
+				}
+				if(curr==0)
+				{
+					cout<<"value not found"<<endl;
+				}
+				else
+				{
+					Cnode* newnode=new Cnode(value);
+					newnode->next=curr;
+					prev->next=newnode;
+				}
+				
+			}
+		}
+};
