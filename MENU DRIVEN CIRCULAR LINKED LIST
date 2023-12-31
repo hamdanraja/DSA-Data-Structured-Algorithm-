@@ -1,0 +1,67 @@
+#include <iostream>
+#include "Clinkedlist.cp"
+using namespace std;
+int main()
+{
+	double value;
+	double existing;
+	char con;
+	int choice;
+	Clinkedlist list;
+	do
+	{
+		
+		cout<<"Press 1 for insert at head"<<endl;
+		cout<<"Press 2 for insert at last"<<endl;
+		cout<<"Press 3 for insert after"<<endl;
+		cout<<"Press 4 for insert before"<<endl;
+		cout<<"Press 5 for delete from head"<<endl;
+		cout<<"Press 6 for delete from specific node"<<endl;
+		cout<<"Press 7 for traverse node"<<endl;
+		cout<<"Enter choice: ";
+		cin>>choice;
+		switch (choice)
+		{
+			case 1:
+			cout<<"Enter value to insert at head: ";
+			cin>>value;
+			list.Insertathead(value);
+			break;
+	     case 2:
+			cout<<"Enter value to insert at tail: ";
+			cin>>value;
+			list.insertatlast(value);
+		    break;
+		case 3:
+			cout<<"Enter value to insert after: ";
+			cin>>existing;
+			cin>>value;
+			list.InsertAfter(existing,value);
+		     break;
+	    case 4:
+			cout<<"Enter value to insert before: ";
+			cin>>existing;
+			cin>>value;
+			list.insertBefore(existing,value);
+		    break;
+		case 5:		
+			list.deletefromhead();
+		    break;
+		case 6:	
+			cout<<"Enter value for specific node deletion: ";
+			cin>>value;
+			list.deletespecific(value);
+			break;	
+		case 7:	
+			list.traverse();
+		    break;    
+		default:
+			cout<<"Sorry! Wrong choise"<<endl;
+			break;
+		}
+		cout<<"\nPress (y) for again continue the program and press any key except (y) for exit: ";
+		cin>>con;
+		
+	}
+	while(con == 'y');
+}
