@@ -1,0 +1,324 @@
+
+NODE.H FILE:
+#include <iostream>
+#include <string>
+using namespace std;
+class Node
+{
+public:
+string title;
+string author;
+Node* next;
+Node(string t=0, string a=0, Node*n=0 )
+{
+title = t;
+author = a;
+next = n;
+
+}
+};
+
+
+LIBRARY.H FILE:
+#include <iostream>
+#include <string>
+#include "node.h"
+using namespace std;
+class Library
+{
+private:
+Node* head;
+Node* tail;
+public:
+Library()
+{
+head = 0;
+tail= 0;
+}
+//if empty
+bool isEmpty()
+{
+if(head==0 && tail==0)
+{
+return true;
+}
+else
+{
+return false;
+}
+}
+void AddBookAtHead(string title,string author)
+{
+Node* newNode = new Node(title, author);
+if(isEmpty())
+{
+head=tail=newNode;
+}
+Else
+{
+newNode->next=head;
+head=newNode;
+}
+}
+void AddBookAtTail(string title, string author)
+{
+Node* newNode = new Node(title, author);
+if(isEmpty()){
+head=tail=newNode;
+}
+Else
+{
+tail->next=newNode;
+tail=newNode;
+}
+}
+void insertAfter(string title,string author,string after){
+if(isEmpty()){
+cout<<"No book found"<<endl;
+}
+else if(tail->title==after)
+{
+AddBookAtTail(title,author);
+}
+Else
+{
+Node* curr=head;
+while(curr!=0 && curr->title!=after){
+curr=curr->next;
+}
+if(curr==0)
+{
+cout<<"No author found"<<endl;
+}
+else
+{
+Node* newNode = new Node(title, author);
+newNode->next=curr->next;
+curr->next=newNode;
+}
+}
+}
+void insertBefore(string title,string author,string before){
+
+if(isEmpty()){
+cout<<"No Book"<<endl;
+}
+else if(head->title==before){
+AddBookAtHead(title , author);
+}
+else{
+Node* curr=head;
+Node* prev=head;
+while(curr!=0 && curr->title!=before){
+prev=curr;
+curr=curr->next;
+}
+if(curr==0)
+{
+cout<<"No Book found"<<endl;
+}
+else{
+Node* newNode = new Node(title, author);
+newNode->next=curr;
+prev->next=newNode;
+}
+}
+}
+void deleteBookFromHead()
+{
+if(isEmpty()){
+cout<<"No Book Found";
+}
+else if(head==tail){
+Node* curr = head;
+head=tail=0;
+delete curr;
+}
+else{
+Node* curr = head;
+head=head->next;
+curr->next=0;
+delete curr;
+}
+}
+void deleteBookFromTail(){
+if(isEmpty()){
+cout<<"No Book Found";
+}
+else if(head==tail){
+Node* curr=tail;
+head=tail=0;
+delete curr;
+
+}
+else{
+Node* curr = head;
+Node* prev = 0;
+while(curr->next!=0){
+prev = curr;
+curr = curr->next;
+}
+tail = prev;
+tail->next = 0;
+delete curr;
+}
+}
+void deleteBook(string specific)
+{
+
+if(isEmpty())
+{
+cout<<"Book Not Found";
+}
+else if(head->title==specific){
+deleteBookFromHead();
+}
+else if(tail->title==specific){
+deleteBookFromTail();
+}
+else{
+Node* curr=head;
+Node* prev=0;
+while(curr!=0 && curr->title!=specific){
+prev = curr;
+curr =curr->next;
+}
+if(curr==0){
+cout<<"wrong book ";
+}
+else{
+prev->next = curr->next;
+curr->next = 0;
+delete curr;
+}
+}
+}
+void searchBook(string search)
+{
+Node* curr = head;
+while (curr != 0 && curr->title!= search)
+{
+curr = curr->next;
+}
+if(curr==0)
+{
+cout<<"Book not found";
+}
+else
+{
+cout << "Title: " << curr->title << endl;
+cout << "Author Name: " << curr->author << endl;
+}
+
+}
+
+
+void showBooks() {
+if (isEmpty())
+{
+cout << "Library is Empty." <<endl;
+}
+Node* current = head;
+while (current != 0) {
+cout << "Title: " << current->title << endl;
+cout << "Author: " << current->author << endl;
+current = current->next;
+}
+}
+};
+
+
+
+
+
+
+
+
+
+
+
+
+RUNPROGRAM FILE:
+
+
+#include <iostream>
+#include <string>
+#include"library.h"
+using namespace std;
+int main() {
+Library library;
+
+int choice;
+do
+{
+cout<<"1- ADD BOOK AT HEAD \n2- ADD BOOK AT TAIL \n3- INSERT BEFORE ";
+cout<<"\n4- INSERT AFTER \n5- SEARCH BOOK \n6- DELETE BOOK \n7-  SHOW BOOKS "<<endl;
+cout<<"8- EXIT LIBRARY \n";
+cin>>choice;
+switch(choice){
+case 1:{
+string a,b;
+cout<<"Enter Title: ";
+cin>>a;
+cout<<"Enter Author: ";
+cin>>b;
+library.AddBookAtHead(a,b);
+break;
+}
+case 2:{
+string c,d;
+cout<<"Enter Title: ";
+cin>>c;
+cout<<"Enter Author: ";
+cin>>d;
+library.AddBookAtTail(c,d);
+break;
+}
+case 3:{
+string e,f,g;
+cout<<"Enter title before which you want to add: ";
+cin>>g;
+cout<<"Enter Title: ";
+cin>>e;
+cout<<"Enter Author: ";
+cin>>f;
+library.insertBefore(e,f,g);
+break;
+}
+case 4:{
+string h,i,j;
+cout<<"Enter title after which you want to add: ";
+cin>>j;
+cout<<"Enter Title: ";
+cin>>h;
+cout<<"Enter Author: ";
+cin>>i;
+library.insertAfter(h,i,j);
+break;
+}
+case 5:{
+string k;
+cout<<"Enter title you want to Search: ";
+cin>>k;
+library.searchBook(k);
+break;
+}
+case 6:{
+string l;
+cout<<"Enter title you want to Delete: ";
+cin>>l;
+library.deleteBook(l);
+break;
+}
+case 7:{
+library.showBooks();
+break;
+}
+case 8:{
+exit(0);
+}
+default:
+cout<<"Invalid Choice\n";
+}
+}while(choice!=8);
+}
